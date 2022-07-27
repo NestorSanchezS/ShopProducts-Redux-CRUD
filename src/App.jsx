@@ -5,17 +5,23 @@ import { Productos } from "./components/Productos";
 import { NuevoProducto } from "./components/NuevoProducto";
 import { EditarProducto } from "./components/EditarProducto";
 
+//redux
+import { Provider } from "react-redux";
+import store from "../src/store/store.js";
+
 export const App = () => {
   return (
     <BrowserRouter>
-      <Header />
-      <div className="container mt-5">
-        <Routes>
-          <Route path="/" element={<Productos />} />
-          <Route path="/productos/nuevo" element={<NuevoProducto />} />
-          <Route path="/productos/editar/:id" element={<EditarProducto />} />
-        </Routes>
-      </div>
+      <Provider store={store}>
+        <Header />
+        <div className="container mt-5">
+          <Routes>
+            <Route path="/" element={<Productos />} />
+            <Route path="/product/new" element={<NuevoProducto />} />
+            <Route path="/product/edit/:id" element={<EditarProducto />} />
+          </Routes>
+        </div>
+      </Provider>
     </BrowserRouter>
   );
 };

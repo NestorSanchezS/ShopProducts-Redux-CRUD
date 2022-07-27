@@ -1,5 +1,18 @@
 import React from "react";
 
 export const Productos = () => {
-  return <h1>Productos</h1>;
+  return (
+    <>
+      <h2 className="table table-striped">Listado de Productos</h2>
+      <table className="table table-striped">
+        <thead className="bg-primary table-dark">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+      </table>
+    </>
+  );
 };

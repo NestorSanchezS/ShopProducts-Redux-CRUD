@@ -13,7 +13,7 @@ export const Header = () => {
       </div>
       <Link
         className="btn btn-danger nuevo-post d-block d-md-inline-block"
-        to="/productos/nuevo"
+        to="/product/new"
       >
         Agregar Producto &#43;
       </Link>
