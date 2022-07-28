@@ -2,6 +2,12 @@ import {
   ADD_PRODUCT,
   ADD_PRODUCT_SUCCESS,
   ADD_PRODUCT_ERROR,
+  START_DOWNLOAD_PRODUCT,
+  DOWNLOAD_PRODUCT_SUCCESS,
+  DOWNLOAD_PRODUCT_ERROR,
+  GET_PRODUCT_DELETE,
+  PRODUCT_DELETE_SUCCESS,
+  PRODUCT_DELETE_ERROR,
 } from "../types/index.js";
 import clientAxios from "../config/axios.js";
 import Swal from "sweetalert2";
@@ -39,4 +45,57 @@ const addProductSuccess = (product) => ({
 const addProductError = (error) => ({
   type: ADD_PRODUCT_ERROR,
   payload: error,
+});
+
+//Descarga los productos de la base de datos
+export const getProductAction = () => async (dispatch) => {
+  dispatch(downloadProduct());
+  try {
+    const response = await clientAxios.get("/productos");
+    dispatch(downloadPRoductsSuccess(response.data));
+  } catch (error) {
+    console.log(error);
+    dispatch(downloadProductError());
+  }
+};
+
+const downloadProduct = () => ({
+  type: START_DOWNLOAD_PRODUCT,
+  payload: true,
+});
+
+const downloadPRoductsSuccess = (products) => ({
+  type: DOWNLOAD_PRODUCT_SUCCESS,
+  payload: products,
+});
+
+const downloadProductError = () => ({
+  type: DOWNLOAD_PRODUCT_ERROR,
+  payload: true,
+});
+
+//Seleccioa y elimina
+
+export const deleteProductAction = (id) => async (dispatch) => {
+  dispatch(getProductDelete(id));
+  try {
+    await clientAxios.delete(`/productos/${id}`);
+    dispatch(productDeleteSuccess());
+  } catch (error) {
+    dispatch(productDeleteError());
+  }
+};
+
+const getProductDelete = (id) => ({
+  type: GET_PRODUCT_DELETE,
+  payload: id,
+});
+
+const productDeleteSuccess = () => ({
+  type: PRODUCT_DELETE_SUCCESS,
+});
+
+const productDeleteError = () => ({
+  type: PRODUCT_DELETE_ERROR,
+  payload: true,
 });
