@@ -1,11 +1,6 @@
 {
   "productos": [
     {
-      "id": 1,
-      "name": "Jugo de Zanahoria",
-      "precio": "31111"
-    },
-    {
       "id": 2,
       "name": "Jugo de Naranja",
       "price": "1"
@@ -29,11 +24,6 @@
       "name": "Jugo de piña",
       "price": 20,
       "id": 7
-    },
-    {
-      "name": "Hola",
-      "price": 22,
-      "id": 8
     }
   ]
 }

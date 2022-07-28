@@ -81,7 +81,10 @@ export const deleteProductAction = (id) => async (dispatch) => {
   try {
     await clientAxios.delete(`/productos/${id}`);
     dispatch(productDeleteSuccess());
+    //Si se elimina mostrar alierta
+    Swal.fire("Eliminado!", "El producto se eliminó correctamente.", "success");
   } catch (error) {
+    console.log(error);
     dispatch(productDeleteError());
   }
 };
