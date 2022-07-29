@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewProduct } from "../actions/productAction";
+import { viewAlert, hideAlert } from "../actions/alertAction";
 
 export const NuevoProducto = ({ history }) => {
   const [name, saveName] = useState("");
@@ -11,14 +12,23 @@ export const NuevoProducto = ({ history }) => {
   //acceder al state del store
   const cargando = useSelector((state) => state.products.loading);
   const error = useSelector((state) => state.products.error);
+  const { alert } = useSelector((state) => state.alerts);
 
   const addProduct = (product) => dispatch(createNewProduct(product));
 
   const submitNewProduct = (e) => {
     e.preventDefault();
+
     if (name.trim() === "" || price <= 0) {
+      const alert = {
+        msg: "Ambos campos son oblogatorios",
+        classes: "alert alert-danger text-center text-uppercase p3",
+      };
+      dispatch(viewAlert(alert));
       return;
     }
+
+    dispatch(hideAlert());
     addProduct({
       name,
       price,
@@ -33,6 +43,7 @@ export const NuevoProducto = ({ history }) => {
             <h2 className="text-center mb-4 font-weight-bold">
               Agregar Nuevo Producto
             </h2>
+            {alert ? <p className={alert.classes}>{alert.msg}</p> : null}
             <form onSubmit={submitNewProduct}>
               <div className="form-group">
                 <label htmlFor="nameProduct">Nombre Pruducto</label>
